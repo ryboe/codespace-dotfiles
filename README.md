@@ -1,3 +1,4 @@
 # Codespace Dotfiles
 
-A bunch of Linux config files specifically for use with ryboe/alpinecodespace.
+A bunch of Linux config files specifically for use with
+[`ryboe/alpinecodespace`](https://github.com/ryboe/alpinecodespace).

@@ -1,8 +1,0 @@
-{
-    "recommendations": [
-        "davidanson.vscode-markdownlint",
-        "foxundermoon.shell-format",
-        "ms-azuretools.vscode-docker",
-        "redhat.vscode-yaml",
-    ]
-}
