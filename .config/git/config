@@ -8,7 +8,7 @@ prom = pull --rebase origin main
 pushf = push --force-with-lease
 
 [branch]
-autosetuprebase = always
+autoSetupRebase = always
 
 [filter "lfs"]
 clean = git-lfs clean -- %f
@@ -26,11 +26,12 @@ ff = only
 ff = only
 
 [push]
+autoSetupRemote = true
 default = current
 showUntrackedFiles = all
 
 [transfer]
-fsckobjects = true
+fsckObjects = true
 
 [user]
 name = Ryan Boehning
