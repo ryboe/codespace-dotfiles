@@ -3,8 +3,7 @@
 set -euo pipefail
 
 install_tools() {
-    # fzf depends on perl :(
-    sudo apk add --update bat exa fd file fzf neovim perl ripgrep shfmt
+    sudo apk add --update bat exa fd file fzf neovim ripgrep shfmt
 
     sudo wget --quiet --timeout=30 --output-document=/usr/local/bin/gitprompt https://github.com/ryboe/gitprompt/releases/latest/download/gitprompt-x86_64-unknown-linux-musl
     sudo chmod +x /usr/local/bin/gitprompt
