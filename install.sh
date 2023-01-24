@@ -15,6 +15,7 @@ install_tools_alpine() {
 
 install_tools_debian() {
     sudo apt update
+    sudo apt upgrade
     sudo apt install -y --no-install-recommends bat exa fd-find fzf neovim ripgrep golang-mvdan-sh
     sudo ln -s /usr/bin/batcat ~/usr/bin/bat
     sudo wget --quiet --timeout=30 --output-document=/usr/local/bin/gitprompt https://github.com/ryboe/gitprompt/releases/latest/download/gitprompt-x86_64-unknown-linux-gnu
