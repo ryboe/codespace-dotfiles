@@ -21,7 +21,7 @@ install_tools_debian() {
     #   https://tracker.debian.org/pkg/golang-mvdan-sh
     sudo apt install -y --no-install-recommends bat exa fd-find fzf neovim ripgrep
     mkdir -p ~/.local/bin
-    wget --quiet --timeout=30 --output-document=~/.local/bin/gitprompt https://github.com/ryboe/gitprompt/releases/latest/download/gitprompt-x86_64-unknown-linux-gnu
+    wget --quiet --timeout=30 --output-document=$HOME/.local/bin/gitprompt https://github.com/ryboe/gitprompt/releases/latest/download/gitprompt-x86_64-unknown-linux-gnu
     chmod +x ~/.local/bin/gitprompt
     # bat and fd have stupid names on Debian of naming conflicts with
     # preexisting packages, so give them a proper name.
