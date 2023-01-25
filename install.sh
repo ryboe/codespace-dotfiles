@@ -15,10 +15,18 @@ install_tools_alpine() {
 
 install_tools_debian() {
     sudo apt update
-    sudo apt install -y --no-install-recommends bat exa fd-find fzf neovim ripgrep golang-mvdan-sh
-    sudo ln -s /usr/bin/batcat ~/usr/bin/bat
-    sudo wget --quiet --timeout=30 --output-document=/usr/local/bin/gitprompt https://github.com/ryboe/gitprompt/releases/latest/download/gitprompt-x86_64-unknown-linux-gnu
-    sudo chmod +x /usr/local/bin/gitprompt
+    # shfmt is not available on apt yet. The shfmt package is named
+    # golang-mvdan-sh, but it's only in testing. See this URL for status
+    # updates:
+    #   https://tracker.debian.org/pkg/golang-mvdan-sh
+    sudo apt install -y --no-install-recommends bat exa fd-find fzf neovim ripgrep
+    mkdir -p ~/.local/bin
+    wget --quiet --timeout=30 --output-document=~/.local/bin/gitprompt https://github.com/ryboe/gitprompt/releases/latest/download/gitprompt-x86_64-unknown-linux-gnu
+    chmod +x ~/.local/bin/gitprompt
+    # bat and fd have stupid names on Debian of naming conflicts with
+    # preexisting packages, so give them a proper name.
+    ln -s /usr/bin/batcat ~/.local/bin/bat
+    ln -s /usr/bin/fdfind ~/.local/bin/fd
 
     sudo wget --quiet --timeout=30 --output-document=/usr/share/fzf/completion.zsh https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh
     sudo wget --quiet --timeout=30 --output-document=/usr/share/fzf/key-bindings.zsh https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh
