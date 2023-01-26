@@ -23,7 +23,7 @@ install_tools_debian() {
     # golang-mvdan-sh, but it's only in testing. See this URL for status
     # updates:
     #   https://tracker.debian.org/pkg/golang-mvdan-sh
-    sudo apt install -y --no-install-recommends bat exa fd-find fzf neovim ripgrep
+    DEBIAN_FRONTEND=noninteractive sudo apt install -y --no-install-recommends bat exa fd-find fzf neovim ripgrep
     mkdir -p $HOME/.local/bin
     wget --quiet --timeout=30 --output-document=$HOME/.local/bin/gitprompt https://github.com/ryboe/gitprompt/releases/latest/download/gitprompt-x86_64-unknown-linux-gnu
     chmod +x $HOME/.local/bin/gitprompt
