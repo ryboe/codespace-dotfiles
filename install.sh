@@ -16,7 +16,7 @@ install_tools_alpine() {
 install_tools_debian() {
     # apt will try to install completions to this dir, but it won't create the
     # directory for some reason.
-    mkdir -p /usr/share/fzf
+    sudo mkdir -p /usr/share/fzf
 
     sudo apt update
     # shfmt is not available on apt yet. The shfmt package is named
