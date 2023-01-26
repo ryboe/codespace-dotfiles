@@ -8,29 +8,37 @@ install_tools_alpine() {
     sudo wget --quiet --timeout=30 --output-document=/usr/local/bin/gitprompt https://github.com/ryboe/gitprompt/releases/latest/download/gitprompt-x86_64-unknown-linux-musl
     sudo chmod +x /usr/local/bin/gitprompt
 
-    # Install fzf completions manually, because apk doesn't do that for us.
+    # Install fzf completions manually, because apk doesn't do that for us. Note
+    # that this is installing the latest completions, which won't match the old
+    # version of fzf available on apk. Unfortunately, there's no reliable way to
+    # get the fzf version, because the output of `fzf --version` doesn't always
+    # match the git tags on the github.com/junegunn/fzf repo.
     sudo wget --quiet --timeout=30 --output-document=/usr/share/fzf/completion.zsh https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh
-    sudo wget --quiet --timeout=30 --output-document=/usr/share/fzf/key-bindings.zsh https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh
 }
 
 install_tools_debian() {
-    # apt will try to install completions to this dir, but it won't create the
-    # directory for some reason.
-    sudo mkdir -p /usr/share/fzf
-
     sudo apt update
     # shfmt is not available on apt yet. The shfmt package is named
     # golang-mvdan-sh, but it's only in testing. See this URL for status
     # updates:
     #   https://tracker.debian.org/pkg/golang-mvdan-sh
-    DEBIAN_FRONTEND=noninteractive sudo apt install -y --no-install-recommends bat exa fd-find fzf neovim ripgrep
-    mkdir -p $HOME/.local/bin
-    wget --quiet --timeout=30 --output-document=$HOME/.local/bin/gitprompt https://github.com/ryboe/gitprompt/releases/latest/download/gitprompt-x86_64-unknown-linux-gnu
-    chmod +x $HOME/.local/bin/gitprompt
+    sudo apt install -y --no-install-recommends bat exa fd-find fzf neovim ripgrep
+
     # bat and fd have stupid names on Debian of naming conflicts with
     # preexisting packages, so give them a proper name.
+    mkdir -p $HOME/.local/bin
     ln -s /usr/bin/batcat $HOME/.local/bin/bat
     ln -s /usr/bin/fdfind $HOME/.local/bin/fd
+
+    # apt installs the fzf completions and key-bindings to a weird directory, so
+    # let's move them to the directory that alpine uses.
+    sudo mkdir -p /usr/share/fzf
+    sudo cp /usr/share/doc/fzf/examples/completions.zsh /usr/share/fzf/completions.zsh
+    sudo cp /usr/share/doc/fzf/examples/key-bindings.zsh /usr/share/fzf/key-bindings.zsh
+
+    # Install gitprompt.
+    wget --quiet --timeout=30 --output-document=$HOME/.local/bin/gitprompt https://github.com/ryboe/gitprompt/releases/latest/download/gitprompt-x86_64-unknown-linux-gnu
+    chmod +x $HOME/.local/bin/gitprompt
 }
 
 install_tools() {
@@ -44,21 +52,22 @@ install_tools() {
     fi
 }
 
-create_symlinks() {
+install_configs() {
     # Delete any existing configs.
-    rm -rf ~/.bash_logout ~/.bashrc ~/.config ~/.oh-my-zsh ~/.profile ~/.zshrc
+    rm -rf ~/.bash_logout ~/.bashrc ~/.config/git ~/.oh-my-zsh ~/.profile ~/.zshrc
     mkdir -p ~/.config/git
 
+    mkdir -p $HOME/.config/git
     script_dir=${0:a:h}
-    ln -s "$script_dir/.config/git/config" $HOME/.config/git/config
-    ln -s "$script_dir/.config/git/ignore" $HOME/.config/git/ignore
-    ln -s "$script_dir/.zshrc" $HOME/.zshrc
+    mv "$script_dir/.config/git/config" $HOME/.config/git/config
+    mv "$script_dir/.config/git/ignore" $HOME/.config/git/ignore
+    mv "$script_dir/.zshrc" $HOME/.zshrc
 }
 
 main() {
     install_tools
 
-    create_symlinks
+    install_configs
 }
 
 main
