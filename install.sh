@@ -33,7 +33,7 @@ install_tools_debian() {
     # apt installs the fzf completions and key-bindings to a weird directory, so
     # let's move them to the directory that alpine uses.
     sudo mkdir -p /usr/share/fzf
-    sudo cp /usr/share/doc/fzf/examples/completions.zsh /usr/share/fzf/completions.zsh
+    sudo cp /usr/share/doc/fzf/examples/completion.zsh /usr/share/fzf/completion.zsh
     sudo cp /usr/share/doc/fzf/examples/key-bindings.zsh /usr/share/fzf/key-bindings.zsh
 
     # Install gitprompt.
