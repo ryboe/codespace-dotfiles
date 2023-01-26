@@ -48,8 +48,8 @@ install_tools() {
 create_symlinks() {
     script_dir=${0:a:h}
 
-    rm -rf ~/.bashrc ~/.config ~/.oh-my-zsh ~/.zshrc
-    mkdir -p ~/.config/git
+    rm -rf $HOME/.bashrc $HOME/.config $HOME/.oh-my-zsh $HOME/.zshrc
+    mkdir -p $HOME/.config/git
     ln -s "$script_dir/.config/git/config" $HOME/.config/git/config
     ln -s "$script_dir/.config/git/ignore" $HOME/.config/git/ignore
     ln -s "$script_dir/.zshrc" $HOME/.zshrc
