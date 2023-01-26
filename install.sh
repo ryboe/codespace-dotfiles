@@ -8,9 +8,7 @@ install_tools_alpine() {
     sudo wget --quiet --timeout=30 --output-document=/usr/local/bin/gitprompt https://github.com/ryboe/gitprompt/releases/latest/download/gitprompt-x86_64-unknown-linux-musl
     sudo chmod +x /usr/local/bin/gitprompt
 
-    # Install fzf shell integration functions to /usr/share/fzf.
-    sudo wget --quiet --timeout=30 --output-document=/usr/share/fzf/completion.zsh https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh
-    sudo wget --quiet --timeout=30 --output-document=/usr/share/fzf/key-bindings.zsh https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh
+    install_fzf_zsh_completions
 }
 
 install_tools_debian() {
@@ -20,14 +18,18 @@ install_tools_debian() {
     # updates:
     #   https://tracker.debian.org/pkg/golang-mvdan-sh
     sudo apt install -y --no-install-recommends bat exa fd-find fzf neovim ripgrep
-    mkdir -p ~/.local/bin
+    mkdir -p $HOME/.local/bin
     wget --quiet --timeout=30 --output-document=$HOME/.local/bin/gitprompt https://github.com/ryboe/gitprompt/releases/latest/download/gitprompt-x86_64-unknown-linux-gnu
-    chmod +x ~/.local/bin/gitprompt
+    chmod +x $HOME/.local/bin/gitprompt
     # bat and fd have stupid names on Debian of naming conflicts with
     # preexisting packages, so give them a proper name.
-    ln -s /usr/bin/batcat ~/.local/bin/bat
-    ln -s /usr/bin/fdfind ~/.local/bin/fd
+    ln -s /usr/bin/batcat $HOME/.local/bin/bat
+    ln -s /usr/bin/fdfind $HOME/.local/bin/fd
 
+    install_fzf_zsh_completions
+}
+
+install_fzf_zsh_completions() {
     sudo wget --quiet --timeout=30 --output-document=/usr/share/fzf/completion.zsh https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh
     sudo wget --quiet --timeout=30 --output-document=/usr/share/fzf/key-bindings.zsh https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh
 }
