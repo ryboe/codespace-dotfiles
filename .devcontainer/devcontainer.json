@@ -1,8 +1,6 @@
 {
     "name": "codespace-dotfiles",
-    "build": {
-        "dockerfile": "Dockerfile"
-    },
+    "image": "ghcr.io/ryboe/alpinecodespace:latest",
     "settings": {
         "[dockerfile]": {
             "editor.defaultFormatter": "ms-azuretools.vscode-docker"

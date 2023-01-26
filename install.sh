@@ -14,6 +14,10 @@ install_tools_alpine() {
 }
 
 install_tools_debian() {
+    # apt will try to install completions to this dir, but it won't create the
+    # directory for some reason.
+    mkdir -p /usr/share/fzf
+
     sudo apt update
     # shfmt is not available on apt yet. The shfmt package is named
     # golang-mvdan-sh, but it's only in testing. See this URL for status
@@ -41,7 +45,8 @@ install_tools() {
 }
 
 create_symlinks() {
-    rm -rf ~/.bashrc ~/.config ~/.oh-my-zsh ~/.zshrc
+    # Delete any existing configs.
+    rm -rf ~/.bash_logout ~/.bashrc ~/.config ~/.oh-my-zsh ~/.profile ~/.zshrc
     mkdir -p ~/.config/git
 
     script_dir=${0:a:h}
