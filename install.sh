@@ -30,6 +30,7 @@ install_tools_debian() {
 }
 
 install_fzf_zsh_completions() {
+    sudo mkdir -p /usr/share/fzf
     sudo wget --quiet --timeout=30 --output-document=/usr/share/fzf/completion.zsh https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh
     sudo wget --quiet --timeout=30 --output-document=/usr/share/fzf/key-bindings.zsh https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh
 }
@@ -46,10 +47,10 @@ install_tools() {
 }
 
 create_symlinks() {
-    script_dir=${0:a:h}
+    rm -rf ~/.bashrc ~/.config ~/.oh-my-zsh ~/.zshrc
+    mkdir -p ~/.config/git
 
-    rm -rf $HOME/.bashrc $HOME/.config $HOME/.oh-my-zsh $HOME/.zshrc
-    mkdir -p $HOME/.config/git
+    script_dir=${0:a:h}
     ln -s "$script_dir/.config/git/config" $HOME/.config/git/config
     ln -s "$script_dir/.config/git/ignore" $HOME/.config/git/ignore
     ln -s "$script_dir/.zshrc" $HOME/.zshrc
