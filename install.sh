@@ -8,7 +8,9 @@ install_tools_alpine() {
     sudo wget --quiet --timeout=30 --output-document=/usr/local/bin/gitprompt https://github.com/ryboe/gitprompt/releases/latest/download/gitprompt-x86_64-unknown-linux-musl
     sudo chmod +x /usr/local/bin/gitprompt
 
-    install_fzf_zsh_completions
+    # Install fzf completions manually, because apk doesn't do that for us.
+    sudo wget --quiet --timeout=30 --output-document=/usr/share/fzf/completion.zsh https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh
+    sudo wget --quiet --timeout=30 --output-document=/usr/share/fzf/key-bindings.zsh https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh
 }
 
 install_tools_debian() {
@@ -25,14 +27,6 @@ install_tools_debian() {
     # preexisting packages, so give them a proper name.
     ln -s /usr/bin/batcat $HOME/.local/bin/bat
     ln -s /usr/bin/fdfind $HOME/.local/bin/fd
-
-    install_fzf_zsh_completions
-}
-
-install_fzf_zsh_completions() {
-    sudo mkdir -p /usr/share/fzf
-    sudo wget --quiet --timeout=30 --output-document=/usr/share/fzf/completion.zsh https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.zsh
-    sudo wget --quiet --timeout=30 --output-document=/usr/share/fzf/key-bindings.zsh https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.zsh
 }
 
 install_tools() {
