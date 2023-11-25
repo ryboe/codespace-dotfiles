@@ -16,6 +16,7 @@ bindkey -v # use vim commands in the line editor
 export EDITOR='code'
 export FZF_ALT_C_COMMAND=" fd --type d --hidden . $HOME /usr /etc"
 export FZF_CTRL_T_COMMAND="fd --type f --hidden . $HOME /usr /etc"
+export GOEXPERIMENT='loopvar'
 export HISTSIZE='10000'
 export PROMPT='%F{cyan}${PWD/#$HOME/~}%f %F{yellow}$(gitprompt)%f '
 export RUSTFLAGS='--codegen target-cpu=native'

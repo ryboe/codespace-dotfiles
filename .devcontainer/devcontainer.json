@@ -1,5 +1,5 @@
 {
-    "name": "codespace-dotfiles",
+    "name": "Codespace Dotfiles",
     "image": "ghcr.io/ryboe/alpinecodespace:latest",
     "customizations": {
         "vscode": {

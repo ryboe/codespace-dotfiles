@@ -4,7 +4,7 @@ editor = code --wait
 [alias]
 can = commit --amend --no-edit
 fetchall = fetch --all --prune --tags
-prom = pull --rebase origin main
+pro = pull --rebase origin
 pushf = push --force-with-lease
 
 [branch]
@@ -23,6 +23,7 @@ defaultBranch = main
 ff = only
 
 [pull]
+autoSetupRemote = true
 ff = only
 
 [push]
