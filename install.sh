@@ -5,9 +5,6 @@ set -euo pipefail
 install_tools_alpine() {
     sudo apk add --update bat exa fd file fzf neovim ripgrep shfmt
 
-    sudo wget --quiet --timeout=30 --output-document=/usr/local/bin/gitprompt https://github.com/ryboe/gitprompt/releases/latest/download/gitprompt-x86_64-unknown-linux-musl
-    sudo chmod +x /usr/local/bin/gitprompt
-
     # Install fzf completions manually, because apk doesn't do that for us. Note
     # that this is installing the latest completions, which won't match the old
     # version of fzf available on apk. Unfortunately, there's no reliable way to
@@ -35,10 +32,6 @@ install_tools_debian() {
     sudo mkdir -p /usr/share/fzf
     sudo cp /usr/share/doc/fzf/examples/completion.zsh /usr/share/fzf/completion.zsh
     sudo cp /usr/share/doc/fzf/examples/key-bindings.zsh /usr/share/fzf/key-bindings.zsh
-
-    # Install gitprompt.
-    wget --quiet --timeout=30 --output-document=$HOME/.local/bin/gitprompt https://github.com/ryboe/gitprompt/releases/latest/download/gitprompt-x86_64-unknown-linux-gnu
-    chmod +x $HOME/.local/bin/gitprompt
 }
 
 install_tools() {
