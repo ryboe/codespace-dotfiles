@@ -6,7 +6,8 @@ setopt hist_ignore_all_dups # remove older command if it's a dup of the most rec
 setopt hist_ignore_space    # don't record commands in history if they start with a space
 setopt hist_reduce_blanks   # trim unnecessary whitespace
 setopt hist_save_no_dups    # remove dups on save
-setopt prompt_subst         # enable $(gitprompt) in prompt string (see $PROMPT)
+setopt inc_append_history   # add commands to history as they are entered, not at shell exit
+setopt no_case_glob         # case insensitive globbing
 setopt share_history        # all zsh sessions share ~/.zsh_history. makes ctrl+r searches better
 
 # KEY BINDINGS
@@ -16,9 +17,7 @@ bindkey -v # use vim commands in the line editor
 export EDITOR='code'
 export FZF_ALT_C_COMMAND=" fd --type d --hidden . $HOME /usr /etc"
 export FZF_CTRL_T_COMMAND="fd --type f --hidden . $HOME /usr /etc"
-export GOEXPERIMENT='loopvar'
-export HISTSIZE='10000'
-export PROMPT='%F{cyan}${PWD/#$HOME/~}%f %F{yellow}$(gitprompt)%f '
+export HISTSIZE='50000'
 export RUSTFLAGS='--codegen target-cpu=native'
 export SAVEHIST="$HISTSIZE"
 
